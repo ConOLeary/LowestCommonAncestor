@@ -10,7 +10,7 @@ public class BinaryTree {
     		push(newNode, head);
     }
     private void push(Node<Integer> newNode, Node<Integer> current) {
-    		if(current.getData() >= head.getData())
+    		if(newNode.getData() >= current.getData())
     		{
     			Node<Integer> rightChild= current.getRightChild();
     			if(rightChild == null)
