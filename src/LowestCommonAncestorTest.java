@@ -28,9 +28,9 @@ public class LowestCommonAncestorTest {
 		sampleTree.push(node6);
 		System.out.print("data @ rightChild of head :"+sampleTree.head.getRightChild().getData().toString());
 		assertEquals("a","a");
-		Node<Integer> ancestor= LowestCommonAncestor.findLCA(sampleHead,420,9);
-		assertEquals(ancestor,sampleHead.getRightChild());
-		assertEquals(node1,node2);
+		LowestCommonAncestor lcaImplementation= new LowestCommonAncestor();
+		Node<Integer> ancestor= lcaImplementation.lowestCommonAncestor(sampleHead, node5, node3);
+		assertEquals(ancestor,sampleHead);
 		assertEquals(1,1);
 		System.out.print("buffffffer");
 	}
