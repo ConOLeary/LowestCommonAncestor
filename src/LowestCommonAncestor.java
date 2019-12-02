@@ -1,12 +1,16 @@
+
 class LowestCommonAncestor {
 
-    private Node<Integer> ans;
+    private Node<Integer> ans1;
+    private DAG.Node ans2;
 
     public LowestCommonAncestor() {
         // Variable to store LCA node.
-        this.ans = null;
+        this.ans1 = null;
+        this.ans2 = null;
     }
-
+    
+    //***leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/solution
     private boolean recurseTree(Node<Integer> currentNode, Node<Integer> p, Node<Integer> q) {
 
         // If reached the end of a branch, return false.
@@ -26,7 +30,7 @@ class LowestCommonAncestor {
 
         // If any two of the flags left, right or mid become True
         if (mid + left + right >= 2) {
-            this.ans = currentNode;
+            this.ans1 = currentNode;
         }
 
         // Return true if any one of the three bool values is True.
@@ -36,6 +40,7 @@ class LowestCommonAncestor {
     public Node<Integer> lowestCommonAncestor(Node<Integer> root, Node<Integer> p, Node<Integer> q) {
         // Traverse the tree
         this.recurseTree(root, p, q);
-        return this.ans;
+        return this.ans1;
     }
+    //leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/solution***
 }
