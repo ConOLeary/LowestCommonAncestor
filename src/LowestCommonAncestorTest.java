@@ -34,9 +34,11 @@ public class LowestCommonAncestorTest {
 	
 	@Test
 	public void LCAnormal() {
-		System.out.print("data @ rightChild of head :"+sampleTree.head.getRightChild().getData().toString());
+		//System.out.print("data @ rightChild of head :"+sampleTree.head.getRightChild().getData().toString());
 		ancestor= lcaImplementation.lowestCommonAncestor(sampleHead, node5, node3);
 		assertEquals(ancestor,sampleHead);
+		ancestor= lcaImplementation.lowestCommonAncestor(sampleHead, node2, node6);
+		assertEquals(ancestor,node1);
 	}
 	@Test
 	public void LCAnullInputs() {
