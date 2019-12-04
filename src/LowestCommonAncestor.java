@@ -2,12 +2,10 @@
 class LowestCommonAncestor {
 
     private Node<Integer> ans1;
-    private DAG.Node ans2;
 
     public LowestCommonAncestor() {
         // Variable to store LCA node.
         this.ans1 = null;
-        this.ans2 = null;
     }
     
     //***leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/solution
