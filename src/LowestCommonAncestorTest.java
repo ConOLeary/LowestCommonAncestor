@@ -32,14 +32,14 @@ public class LowestCommonAncestorTest {
 		sampleTree.push(node5);
 		sampleTree.push(node6);
 		myDagGraph =new dag.Graph(3);
-		myDagGraph.addEdge(1, 2);
+//		myDagGraph.addEdge(1, 2);
 		myDagGraph.addEdge(1, 3);
-		myDagGraph.addEdge(3, 1);
+//		myDagGraph.addEdge(3, 1);
 		myDagGraph.addEdge(2, 1);
 //		myDagGraph.addEdge(2, 3);
 //		myDagGraph.addEdge(3, 2);
 		myDagGraph.printGraph();
-		System.out.println("noCircuits: "+myDagGraph.hasCircuit());
+		System.out.println("hasCircuit: "+myDagGraph.hasCircuit());
 	}
 	
 	@Test

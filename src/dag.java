@@ -61,6 +61,7 @@ public class dag {
 			List<Integer> newVisits = new ArrayList<Integer>();
 			List<Integer> oldNewVisits = new ArrayList<Integer>();
 			List<Integer> hasBeenVisited = new ArrayList<Integer>();
+			//shouldnt necessarily start from 1, as 1 could be an island
 			for(int currentVertPerspective = 1; currentVertPerspective <= noOfVerts; currentVertPerspective++)
 			{
 				newVisits.clear();
@@ -79,12 +80,14 @@ public class dag {
 					{
 						for(int k = 0; k < adjacencyList[oldNewVisits.get(j)].size(); k++)
 						{
+							System.out.print(adjacencyList[oldNewVisits.get(j)].get(k).v);
 							int newVert = adjacencyList[oldNewVisits.get(j)].get(k).v;
 							if(hasBeenVisited.contains(newVert))
 								return true;
 							newVisits.add(newVert);
 						}
 					}
+					oldNewVisits.clear();
 				}
 			}
 			return false;
