@@ -7,4 +7,8 @@ and in the past I have never come across a problem with its use for implementing
 - JUNit Tests: I have used these before.
 - Eclipse: I have used this IDE in combination with JUNit and Java before.
 
+<u>Conclusion</u>
+Incoherency between the way I designed my Binary Tree and Directed Acyclic Graph data structures led to trouble, particarly with algorithm design. Ultimately got the two data structures and the LCA algo for the BT running and tested, but didn't finish the LCA algo adaption for the DAG.
+
 ###
+
