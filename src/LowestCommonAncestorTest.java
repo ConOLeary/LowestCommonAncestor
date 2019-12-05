@@ -37,7 +37,7 @@ public class LowestCommonAncestorTest {
 //		myDagGraph.addEdge(3, 1);
 		myDagGraph.addEdge(2, 1);
 //		myDagGraph.addEdge(2, 3);
-//		myDagGraph.addEdge(3, 2);
+		myDagGraph.addEdge(3, 2);
 		myDagGraph.printGraph();
 		System.out.println("hasCircuit: "+myDagGraph.hasCircuit());
 	}
@@ -45,23 +45,28 @@ public class LowestCommonAncestorTest {
 	@Test
 	public void LCAnormal() {
 		System.out.print("data @ rightChild of head :"+sampleTree.head.getRightChild().getData().toString());
-		ancestor= lcaImplementation.lowestCommonAncestor(sampleHead, node5, node3);
+		ancestor= lcaImplementation.lowestCommonAncestorBT(sampleHead, node5, node3);
 		assertEquals(ancestor,sampleHead);
 	}
 	@Test
 	public void LCAnullInputs() {
-		ancestor= lcaImplementation.lowestCommonAncestor(null, null, null);
+		ancestor= lcaImplementation.lowestCommonAncestorBT(null, null, null);
 		assertEquals(ancestor,null);
-		ancestor= lcaImplementation.lowestCommonAncestor(sampleHead, null, null);
+		ancestor= lcaImplementation.lowestCommonAncestorBT(sampleHead, null, null);
 		assertEquals(ancestor,null);
-		ancestor= lcaImplementation.lowestCommonAncestor(sampleHead, node1, null);
+		ancestor= lcaImplementation.lowestCommonAncestorBT(sampleHead, node1, null);
 		assertEquals(ancestor,null);
 	}
 	@Test
 	public void LCAotherEdgeCases() {
-		ancestor= lcaImplementation.lowestCommonAncestor(sampleHead, node1, node1);
+		ancestor= lcaImplementation.lowestCommonAncestorBT(sampleHead, node1, node1);
 		assertEquals(ancestor,null);
-		ancestor= lcaImplementation.lowestCommonAncestor(node1, node1, node1);
+		ancestor= lcaImplementation.lowestCommonAncestorBT(node1, node1, node1);
 		assertEquals(ancestor,null);
+	}
+	@Test
+	public void lcaDagNormal() {
+		ancestor= LowestCommonAncestor.lowestCommonAncestorDAG(myDagGraph);
+		assertEquals(ancestor,sampleHead);
 	}
 }

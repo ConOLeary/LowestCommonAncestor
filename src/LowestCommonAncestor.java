@@ -1,11 +1,13 @@
+import java.util.ArrayList;
 
 class LowestCommonAncestor {
-
+	
     private Node<Integer> ans1;
+    private int ans2;
 
     public LowestCommonAncestor() {
-        // Variable to store LCA node.
         this.ans1 = null;
+        this.ans2 = 0;
     }
     
     //***leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/solution
@@ -35,10 +37,56 @@ class LowestCommonAncestor {
         return (mid + left + right > 0);
     }
 
-    public Node<Integer> lowestCommonAncestor(Node<Integer> root, Node<Integer> p, Node<Integer> q) {
+    private int lcaDag(int v, int w, int vertCount, int edgeCount, ArrayList<dag.dagEdge>[] edges){
+		int[] vArr = new int[edgeCount];
+		int[] wArr = new int[edgeCount];
+		boolean[] vMarked = new boolean[vertCount];
+		boolean[] wMarked = new boolean[vertCount];
+		int vCount =0;
+		int wCount = 0;
+		vArr[vCount]=v;
+		wArr[wCount]=w;
+		for(int j=0; j<vertCount;j++){//mark all vertices as not been visited yet
+			vMarked[j]=false;
+			wMarked[j]=false;
+		}
+		for(int i =0;i<vertCount;i++){
+			vMarked[v] =true;
+			wMarked[w] =true;
+			for(int j = 0; j<vertCount;j++){
+				if(edges[i].get(j).v==1 && vMarked[i]){
+					vCount++;
+					vArr[vCount]=j;
+					vMarked[j]=true;
+				}
+				if(edges[i].get(j).v==1 && wMarked[i]){
+					wCount++;
+					wArr[wCount]=j;
+					wMarked[j]=true;
+				}
+				if(wArr[wCount]==vArr[vCount]){
+					ans2 = wArr[wCount];
+					return wArr[wCount];
+				}
+			}
+		}
+		ans2 = -1;
+		return -1;//returns -1 if no ancestor found
+   }
+    
+    public Node<Integer> lowestCommonAncestorBT(Node<Integer> root, Node<Integer> p, Node<Integer> q) {
         // Traverse the tree
         this.recurseTree(root, p, q);
         return this.ans1;
+    }//leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/solution***
+    
+    public int lowestCommonAncestorDAG(dag.Graph myDagGraph) {
+    	int v = 1;
+    	int w = myDagGraph.adjacencyList[v].get(0).v;
+    	int vertCount = myDagGraph.noOfVerts;
+    	int edgeCount = myDagGraph.getEdgeCount();
+    	ArrayList<dag.dagEdge>[] edges = myDagGraph.adjacencyList;
+        this.lcaDag(v, w, vertCount, edgeCount, edges);
+        return this.ans2;
     }
-    //leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/solution***
 }

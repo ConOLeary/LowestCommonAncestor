@@ -2,17 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class dag {
-	
-//	public static class dagVert {
-//
-//		public int data;
-//		
-//	    public dagVert(int nodeData) {
-//	        data = nodeData;
-//	    }
-//	}
-	public static class dagEdge {
 
+	public static class dagEdge {
 		
 		public int u;
 		public int v;
@@ -40,22 +31,15 @@ public class dag {
 			inEdgeCount=new int[noOfVerts+1];
 			this.noOfVerts=noOfVerts;
 		}
-//		public boolean noCircuits()
-//		{
-//			return circuitChecker(1);
-//		}
-//		private boolean circuitChecker(int currentVert)
-//		{
-//			for(int i = 0; i < adjacencyList[currentVert].size(); i++)
-//			{
-//				int travelTo = adjacencyList[currentVert].get(i).v;
-//				if(travelTo == 1)
-//					return false;
-//				circuitChecker(travelTo);
-//			}
-//			return true;
-//		}
-		
+		public int getEdgeCount()
+		{
+			int count = 0;
+			for(int i = 0; i < noOfVerts; i++)
+			{
+				count += adjacencyList[i].size();
+			}
+			return count;
+		}
 		public boolean hasCircuit()
 		{
 			List<Integer> newVisits = new ArrayList<Integer>();
@@ -80,7 +64,6 @@ public class dag {
 					{
 						for(int k = 0; k < adjacencyList[oldNewVisits.get(j)].size(); k++)
 						{
-							System.out.print(adjacencyList[oldNewVisits.get(j)].get(k).v);
 							int newVert = adjacencyList[oldNewVisits.get(j)].get(k).v;
 							if(hasBeenVisited.contains(newVert))
 								return true;
@@ -98,6 +81,10 @@ public class dag {
 			if(adjacencyList[u]==null)
 				adjacencyList[u]=new ArrayList<dagEdge>();
 			adjacencyList[u].add(new dagEdge(u, v));
+			if(hasCircuit() == true){
+				removeEdge(u, v);
+				System.out.print("Adding the edge, "+u+" -> "+v+", would have created a circuit.");
+			}
 		}
 		public void removeEdge(int u, int v)
 		{
