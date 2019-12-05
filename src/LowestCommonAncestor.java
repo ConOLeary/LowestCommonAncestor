@@ -40,26 +40,28 @@ class LowestCommonAncestor {
     private int lcaDag(int v, int w, int vertCount, int edgeCount, ArrayList<dag.dagEdge>[] edges){
 		int[] vArr = new int[edgeCount];
 		int[] wArr = new int[edgeCount];
-		boolean[] vMarked = new boolean[vertCount];
-		boolean[] wMarked = new boolean[vertCount];
+		boolean[] vMarked = new boolean[vertCount+1];
+		boolean[] wMarked = new boolean[vertCount+1];
 		int vCount =0;
 		int wCount = 0;
 		vArr[vCount]=v;
 		wArr[wCount]=w;
-		for(int j=0; j<vertCount;j++){//mark all vertices as not been visited yet
+		for(int j=0; j<=vertCount;j++){//mark all vertices as not been visited yet
 			vMarked[j]=false;
 			wMarked[j]=false;
 		}
-		for(int i =0;i<vertCount;i++){
+		for(int i =1;i<=vertCount;i++){
+			Integer vLoop = 0;
 			vMarked[v] =true;
 			wMarked[w] =true;
-			for(int j = 0; j<vertCount;j++){
-				if(edges[i].get(j).v==1 && vMarked[i]){
+			for(int j = 0; j<edges[i].size();j++){
+				vLoop = edges[i].get(j).v;
+				if(vLoop==1 && vMarked[i]){
 					vCount++;
 					vArr[vCount]=j;
 					vMarked[j]=true;
 				}
-				if(edges[i].get(j).v==1 && wMarked[i]){
+				if(vLoop==1 && wMarked[i]){
 					wCount++;
 					wArr[wCount]=j;
 					wMarked[j]=true;
@@ -80,13 +82,11 @@ class LowestCommonAncestor {
         return this.ans1;
     }//leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/solution***
     
-    public int lowestCommonAncestorDAG(dag.Graph myDagGraph) {
-    	int v = 1;
-    	int w = myDagGraph.adjacencyList[v].get(0).v;
+    public int lowestCommonAncestorDAG(dag.Graph myDagGraph, int v, int w) {
     	int vertCount = myDagGraph.noOfVerts;
-    	int edgeCount = myDagGraph.getEdgeCount();
+    	int edgeCount = myDagGraph.noOfEdges;
     	ArrayList<dag.dagEdge>[] edges = myDagGraph.adjacencyList;
-        this.lcaDag(v, w, vertCount, edgeCount, edges);
-        return this.ans2;
+        lcaDag(v, w, vertCount, edgeCount, edges);
+        return ans2;
     }
 }

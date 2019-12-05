@@ -19,6 +19,7 @@ public class dag {
 		public ArrayList<dagEdge>[] adjacencyList=null;
 		public int[] inEdgeCount=null;
 		public int noOfVerts;
+		public int noOfEdges;
 		@SuppressWarnings("unchecked")
 		public Graph(int noOfVerts)
 		{
@@ -30,15 +31,7 @@ public class dag {
 			}
 			inEdgeCount=new int[noOfVerts+1];
 			this.noOfVerts=noOfVerts;
-		}
-		public int getEdgeCount()
-		{
-			int count = 0;
-			for(int i = 0; i < noOfVerts; i++)
-			{
-				count += adjacencyList[i].size();
-			}
-			return count;
+			noOfEdges = 0;
 		}
 		public boolean hasCircuit()
 		{
@@ -81,9 +74,11 @@ public class dag {
 			if(adjacencyList[u]==null)
 				adjacencyList[u]=new ArrayList<dagEdge>();
 			adjacencyList[u].add(new dagEdge(u, v));
+			noOfEdges++;
 			if(hasCircuit() == true){
+				noOfEdges--;
 				removeEdge(u, v);
-				System.out.print("Adding the edge, "+u+" -> "+v+", would have created a circuit.");
+				System.out.println("Adding the edge, "+u+" -> "+v+", would have created a circuit.");
 			}
 		}
 		public void removeEdge(int u, int v)
@@ -120,6 +115,7 @@ public class dag {
 		}
 		public void printGraph()
 		{
+			System.out.println();
 			ArrayList<dagEdge> edgeList;
 			for(int i=1;i<noOfVerts;i++)
 			{
